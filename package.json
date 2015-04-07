@@ -1,0 +1,7 @@
+{
+	"name": "joe_sample",
+	"description": "Portfolio application",
+	"dependencies": {
+		"express": "~4.11.2"
+	}
+}
