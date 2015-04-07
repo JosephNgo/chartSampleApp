@@ -34,7 +34,7 @@ var margin = {top: 20, right: 20, bottom: 30, left: 50},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-var parseDate = d3.time.format("%y%m%d").parse;
+var parseDate = d3.time.format("%Y%m%d").parse;
 
 var x = d3.time.scale()
     .range([0, width]);
@@ -51,8 +51,8 @@ var yAxis = d3.svg.axis()
     .orient("left");
 
 var line = d3.svg.line()
-    .x(function(d) { return x(d.count); })
-    .y(function(d) { return y(d.date); });
+    .x(function(d) { return x(d.time); })
+    .y(function(d) { return y(d.count); });
 
 var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -71,14 +71,14 @@ var getData = $.ajax({
   for (var i =0; i < resultLength; i++){
     rArray.push({
       count: results[i].count,
-      date: parseDate(results[i].time)
+      time: parseDate(results[i].time)
     });
   }
   
   console.log(rArray);
 
-  x.domain(d3.extent(rArray, function(d) { return d.count; }));
-  y.domain(d3.extent(rArray, function(d) { return d.date; }));
+  x.domain(d3.extent(rArray, function(d) { return d.time; }));
+  y.domain(d3.extent(rArray, function(d) { return d.count; }));
 
   svg.append("g")
       .attr("class", "x axis")
